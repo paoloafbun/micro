@@ -24,6 +24,7 @@
       --dark-blue: #0b2f52;
       --border-blue: #a9d1ed;
       --white: #ffffff;
+      --text-blue: #35688e;
     }
 
     * {
@@ -221,7 +222,7 @@
 
       margin: 6px 0 0;
 
-      color: #35688e;
+      color: var(--text-blue);
     }
 
 
@@ -250,7 +251,7 @@
 
       grid-template-columns:
         minmax(0, 1fr)
-        260px;
+        300px;
 
       gap: 18px;
 
@@ -277,7 +278,7 @@
 
 
     /* =========================
-       COUNTRY SQUARES
+       COUNTRIES ON MAP
     ========================= */
 
     .country {
@@ -330,7 +331,7 @@
 
 
     /* =========================
-       MAP INFO
+       INFORMATION PANEL
     ========================= */
 
     .map-info {
@@ -346,21 +347,23 @@
       box-shadow:
         0 6px 15px rgba(11, 47, 82, 0.08);
 
-      min-height: 260px;
+      min-height: 300px;
     }
 
 
     .map-info h3 {
 
-      margin-top: 0;
+      margin: 0 0 10px;
 
       color: var(--dark-blue);
+
+      font-size: 1.35rem;
     }
 
 
     .map-info p {
 
-      color: #35688e;
+      color: var(--text-blue);
 
       line-height: 1.6;
     }
@@ -374,9 +377,9 @@
 
       width: 100%;
 
-      max-width: 210px;
+      max-width: 220px;
 
-      max-height: 130px;
+      max-height: 135px;
 
       object-fit: contain;
 
@@ -392,6 +395,79 @@
 
       box-shadow:
         0 5px 12px rgba(11, 47, 82, 0.12);
+    }
+
+
+    /* =========================
+       COUNTRY INFORMATION
+    ========================= */
+
+    .country-details {
+
+      display: none;
+    }
+
+
+    .info-row {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 10px;
+
+      padding: 7px 0;
+
+      border-bottom:
+        1px solid var(--border-blue);
+
+      font-size: 0.92rem;
+    }
+
+
+    .info-row:last-child {
+
+      border-bottom: none;
+    }
+
+
+    .info-label {
+
+      font-weight: 900;
+
+      color: var(--dark-blue);
+    }
+
+
+    .info-value {
+
+      color: var(--text-blue);
+
+      text-align: right;
+    }
+
+
+    .info-section {
+
+      margin-top: 15px;
+    }
+
+
+    .info-section h4 {
+
+      margin: 0 0 5px;
+
+      color: var(--dark-blue);
+
+      font-size: 1rem;
+    }
+
+
+    .info-section p {
+
+      margin: 0;
+
+      font-size: 0.92rem;
     }
 
 
@@ -437,7 +513,7 @@
 
       margin: 0;
 
-      color: #35688e;
+      color: var(--text-blue);
 
       line-height: 1.6;
     }
@@ -458,7 +534,7 @@
 
 
     /* =========================
-       COUNTRIES
+       COUNTRIES SECTION
     ========================= */
 
     .country-grid {
@@ -527,7 +603,7 @@
 
       text-align: center;
 
-      color: #35688e;
+      color: var(--text-blue);
 
       border-top:
         1px solid var(--border-blue);
@@ -647,7 +723,9 @@
         <div class="map-layout">
 
 
-          <!-- MAP -->
+          <!-- =====================
+               MAP
+          ====================== -->
 
           <svg
             class="map"
@@ -657,9 +735,7 @@
           >
 
 
-            <!-- =====================
-                 COUNTRY 1
-            ====================== -->
+            <!-- NORTH COUNTRY -->
 
             <rect
               class="country"
@@ -673,16 +749,18 @@
                 showCountry(
                   'North Country',
                   'flag1.png',
-                  'This is North Country. Edit this description in the HTML.'
+                  'Independent',
+                  'North Country is a small micronation known for its northern towns, peaceful countryside, and close-knit communities.',
+                  'North Country was founded after a group of settlers declared the region a separate micronation. Over time, its communities developed their own traditions and institutions.',
+                  'North City',
+                  '2,450',
+                  '2022'
                 )
               "
             />
 
 
-
-            <!-- =====================
-                 COUNTRY 2
-            ====================== -->
+            <!-- EAST COUNTRY -->
 
             <rect
               class="country"
@@ -696,16 +774,18 @@
                 showCountry(
                   'East Country',
                   'flag2.png',
-                  'This is East Country. Edit this description in the HTML.'
+                  'Independent',
+                  'East Country is a coastal micronation with a strong maritime culture and several small settlements.',
+                  'East Country began as a community project and gradually developed into a self-declared micronation with its own flag, government, and national traditions.',
+                  'East City',
+                  '1,820',
+                  '2021'
                 )
               "
             />
 
 
-
-            <!-- =====================
-                 COUNTRY 3
-            ====================== -->
+            <!-- WEST COUNTRY -->
 
             <rect
               class="country"
@@ -719,16 +799,18 @@
                 showCountry(
                   'West Country',
                   'flag3.png',
-                  'This is West Country. Edit this description in the HTML.'
+                  'Self-Governing',
+                  'West Country is a quiet micronation focused on local culture, nature, and community life.',
+                  'West Country was established when several local communities decided to organize themselves as a self-governing micronation. Its early years focused on creating national symbols and a local administration.',
+                  'West City',
+                  '3,120',
+                  '2020'
                 )
               "
             />
 
 
-
-            <!-- =====================
-                 COUNTRY 4
-            ====================== -->
+            <!-- SOUTH COUNTRY -->
 
             <rect
               class="country"
@@ -742,16 +824,23 @@
                 showCountry(
                   'South Country',
                   'flag4.png',
-                  'This is South Country. Edit this description in the HTML.'
+                  'Constitutional Micronation',
+                  'South Country is a small constitutional micronation with a rich fictional history and distinctive national culture.',
+                  'South Country was founded by a group of friends who wanted to create their own country project. It later developed a constitution, national symbols, cities, and a growing historical timeline.',
+                  'South City',
+                  '4,050',
+                  '2019'
                 )
               "
             />
 
 
-
             <!-- =====================
-                 CITY 1
+                 CITY DOTS
             ====================== -->
+
+
+            <!-- NORTH CITY -->
 
             <circle
               class="city-dot"
@@ -763,16 +852,13 @@
               onclick="
                 showCity(
                   'North City',
-                  'North City is located inside North Country.'
+                  'North City is the capital and largest settlement of North Country.'
                 )
               "
             />
 
 
-
-            <!-- =====================
-                 CITY 2
-            ====================== -->
+            <!-- EAST CITY -->
 
             <circle
               class="city-dot"
@@ -784,16 +870,13 @@
               onclick="
                 showCity(
                   'East City',
-                  'East City is located inside East Country.'
+                  'East City is a major coastal city in East Country.'
                 )
               "
             />
 
 
-
-            <!-- =====================
-                 CITY 3
-            ====================== -->
+            <!-- WEST CITY -->
 
             <circle
               class="city-dot"
@@ -805,16 +888,13 @@
               onclick="
                 showCity(
                   'West City',
-                  'West City is located inside West Country.'
+                  'West City is an important cultural center of West Country.'
                 )
               "
             />
 
 
-
-            <!-- =====================
-                 CITY 4
-            ====================== -->
+            <!-- SOUTH CITY -->
 
             <circle
               class="city-dot"
@@ -826,7 +906,7 @@
               onclick="
                 showCity(
                   'South City',
-                  'South City is located inside South Country.'
+                  'South City is the capital of South Country.'
                 )
               "
             />
@@ -843,7 +923,7 @@
           <div class="map-info">
 
 
-            <!-- PNG FLAG -->
+            <!-- FLAG -->
 
             <img
               id="country-flag"
@@ -853,15 +933,130 @@
             >
 
 
+            <!-- TITLE -->
+
             <h3 id="city-title">
               Micronation Map
             </h3>
 
 
+            <!-- BASIC DESCRIPTION -->
+
             <p id="city-description">
-              Click a square to see a country and its flag,
+              Click a square to see a country and its information,
               or click a circle to see a city.
             </p>
+
+
+            <!-- COUNTRY DETAILS -->
+
+            <div
+              id="country-details"
+              class="country-details"
+            >
+
+
+              <!-- STATUS -->
+
+              <div class="info-row">
+
+                <span class="info-label">
+                  Status
+                </span>
+
+                <span
+                  id="country-status"
+                  class="info-value"
+                >
+                </span>
+
+              </div>
+
+
+              <!-- CAPITAL -->
+
+              <div class="info-row">
+
+                <span class="info-label">
+                  Capital
+                </span>
+
+                <span
+                  id="country-capital"
+                  class="info-value"
+                >
+                </span>
+
+              </div>
+
+
+              <!-- POPULATION -->
+
+              <div class="info-row">
+
+                <span class="info-label">
+                  Population
+                </span>
+
+                <span
+                  id="country-population"
+                  class="info-value"
+                >
+                </span>
+
+              </div>
+
+
+              <!-- FOUNDED -->
+
+              <div class="info-row">
+
+                <span class="info-label">
+                  Founded
+                </span>
+
+                <span
+                  id="country-founded"
+                  class="info-value"
+                >
+                </span>
+
+              </div>
+
+
+              <!-- DESCRIPTION -->
+
+              <div class="info-section">
+
+                <h4>
+                  Description
+                </h4>
+
+                <p
+                  id="country-description"
+                >
+                </p>
+
+              </div>
+
+
+              <!-- HISTORY -->
+
+              <div class="info-section">
+
+                <h4>
+                  History
+                </h4>
+
+                <p
+                  id="country-history"
+                >
+                </p>
+
+              </div>
+
+
+            </div>
 
 
           </div>
@@ -1043,8 +1238,14 @@
     function showCountry(
       country,
       flag,
-      description
+      status,
+      description,
+      history,
+      capital,
+      population,
+      founded
     ) {
+
 
       const title =
         document.getElementById(
@@ -1064,16 +1265,30 @@
         );
 
 
+      const details =
+        document.getElementById(
+          "country-details"
+        );
+
+
+      /*
+        Country title
+      */
+
       title.textContent =
         country;
 
 
+      /*
+        Country description
+      */
+
       descriptionBox.textContent =
-        description;
+        "Country information";
 
 
       /*
-        Show the PNG flag
+        Show PNG flag
       */
 
       flagBox.src =
@@ -1087,6 +1302,54 @@
       flagBox.style.display =
         "block";
 
+
+      /*
+        Show country details
+      */
+
+      details.style.display =
+        "block";
+
+
+      /*
+        Fill information
+      */
+
+      document.getElementById(
+        "country-status"
+      ).textContent =
+        status;
+
+
+      document.getElementById(
+        "country-capital"
+      ).textContent =
+        capital;
+
+
+      document.getElementById(
+        "country-population"
+      ).textContent =
+        population;
+
+
+      document.getElementById(
+        "country-founded"
+      ).textContent =
+        founded;
+
+
+      document.getElementById(
+        "country-description"
+      ).textContent =
+        description;
+
+
+      document.getElementById(
+        "country-history"
+      ).textContent =
+        history;
+
     }
 
 
@@ -1095,6 +1358,7 @@
       city,
       description
     ) {
+
 
       const title =
         document.getElementById(
@@ -1114,17 +1378,30 @@
         );
 
 
+      const details =
+        document.getElementById(
+          "country-details"
+        );
+
+
+      /*
+        City title
+      */
+
       title.textContent =
         city;
 
+
+      /*
+        City description
+      */
 
       descriptionBox.textContent =
         description;
 
 
       /*
-        Hide the flag when
-        viewing a city.
+        Cities do not have flags
       */
 
       flagBox.style.display =
@@ -1133,6 +1410,14 @@
 
       flagBox.src =
         "";
+
+
+      /*
+        Hide country information
+      */
+
+      details.style.display =
+        "none";
 
     }
 
