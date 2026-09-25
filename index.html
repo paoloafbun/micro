@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Micronation Hub</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --light-blue: #eef8ff;
+      --pale-blue: #d9efff;
+      --blue: #69afe3;
+      --medium-blue: #3689c7;
+      --dark-blue: #0b2f52;
+      --border-blue: #a9d1ed;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Nunito", sans-serif;
+      background: linear-gradient(
+        180deg,
+        var(--light-blue),
+        #ffffff
+      );
+      color: var(--dark-blue);
+    }
+
+    /* HEADER */
+
+    .site-header {
+      width: min(1050px, calc(100% - 28px));
+      margin: 18px auto;
+      padding: 14px 18px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+
+      background: var(--white);
+      border: 1px solid var(--border-blue);
+      border-radius: 28px;
+
+      box-shadow: 0 8px 22px rgba(11, 47, 82, 0.15);
+
+      position: sticky;
+      top: 12px;
+      z-index: 20;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--dark-blue);
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* BUTTONS */
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 10px 16px;
+
+      border-radius: 14px;
+      border: 1px solid var(--blue);
+
+      background: var(--pale-blue);
+      color: var(--dark-blue);
+
+      font-family: inherit;
+      font-weight: 800;
+      text-decoration: none;
+
+      cursor: pointer;
+
+      box-shadow: 0 5px 12px rgba(11, 47, 82, 0.18);
+
+      transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        background 0.15s ease;
+    }
+
+    .btn:hover {
+      background: #bfe2fa;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 17px rgba(11, 47, 82, 0.22);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn.primary {
+      background: var(--dark-blue);
+      color: white;
+      border-color: var(--dark-blue);
+    }
+
+    .btn.primary:hover {
+      background: var(--medium-blue);
+    }
+
+    /* MAIN */
+
+    main {
+      width: min(1050px, calc(100% - 28px));
+      margin: 0 auto;
+    }
+
+    section {
+      padding: 35px 0;
+      scroll-margin-top: 100px;
+    }
+
+    .section-heading {
+      margin-bottom: 18px;
+    }
+
+    .section-heading h1,
+    .section-heading h2 {
+      margin: 0;
+      color: var(--dark-blue);
+      font-weight: 900;
+    }
+
+    .section-heading p {
+      margin: 6px 0 0;
+      color: #35688e;
+    }
+
+    /* MAP */
+
+    .map-card {
+      background: white;
+      border: 1px solid var(--border-blue);
+      border-radius: 24px;
+      padding: 18px;
+
+      box-shadow: 0 9px 22px rgba(11, 47, 82, 0.13);
+    }
+
+    .map-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .map {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: block;
+
+      background: var(--pale-blue);
+      border: 3px solid var(--dark-blue);
+      border-radius: 22px;
+
+      overflow: hidden;
+    }
+
+    .land {
+      fill: #8fc5ef;
+      stroke: var(--dark-blue);
+      stroke-width: 7;
+    }
+
+    .city-dot {
+      fill: var(--dark-blue);
+      stroke: white;
+      stroke-width: 5;
+      cursor: pointer;
+    }
+
+    .city-dot:hover {
+      fill: var(--medium-blue);
+    }
+
+    .map-info {
+      padding: 18px;
+
+      background: var(--light-blue);
+      border: 1px solid var(--border-blue);
+      border-radius: 18px;
+
+      box-shadow: 0 6px 15px rgba(11, 47, 82, 0.08);
+    }
+
+    .map-info h3 {
+      margin-top: 0;
+      color: var(--dark-blue);
+    }
+
+    .map-info p {
+      color: #35688e;
+    }
+
+    /* NEWS */
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .news-card {
+      background: white;
+      border: 1px solid var(--border-blue);
+      border-radius: 20px;
+      padding: 20px;
+
+      box-shadow: 0 7px 18px rgba(11, 47, 82, 0.11);
+    }
+
+    .news-card h3 {
+      margin: 0 0 8px;
+      color: var(--dark-blue);
+    }
+
+    .news-card p {
+      margin: 0;
+      color: #35688e;
+      line-height: 1.6;
+    }
+
+    .news-date {
+      display: block;
+      margin-top: 12px;
+      color: var(--medium-blue);
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    /* COUNTRIES */
+
+    .country-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .country-card {
+      background: white;
+      border: 1px solid var(--border-blue);
+      border-radius: 20px;
+      padding: 16px;
+
+      box-shadow: 0 7px 18px rgba(11, 47, 82, 0.11);
+    }
+
+    .country-card img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+
+      display: block;
+
+      border-radius: 15px;
+      border: 2px solid var(--border-blue);
+
+      background: var(--pale-blue);
+    }
+
+    .country-card h3 {
+      margin: 13px 0 0;
+      color: var(--dark-blue);
+    }
+
+    /* FOOTER */
+
+    footer {
+      width: min(1050px, calc(100% - 28px));
+      margin: 20px auto 35px;
+      padding: 18px;
+
+      text-align: center;
+
+      color: #35688e;
+      border-top: 1px solid var(--border-blue);
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 760px) {
+      .site-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav {
+        justify-content: center;
+      }
+
+      .map-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .news-grid,
+      .country-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="logo">Micronation Hub</div>
+
+    <nav class="nav">
+      <a class="btn primary" href="#map">Map</a>
+      <a class="btn" href="#news">News</a>
+      <a class="btn" href="#countries">Countries</a>
+    </nav>
+  </header>
+
+
+  <main>
+
+    <!-- MAP -->
+
+    <section id="map">
+
+      <div class="section-heading">
+        <h1>Map</h1>
+        <p>Explore the micronation map.</p>
+      </div>
+
+      <div class="map-card">
+
+        <div class="map-layout">
+
+          <!-- SQUARE MAP -->
+
+          <svg
+            class="map"
+            viewBox="0 0 800 800"
+            preserveAspectRatio="xMidYMid meet"
+            aria-label="Micronation map"
+          >
+
+            <!-- ONE BIG SQUARE PIECE OF LAND -->
+
+            <rect
+              class="land"
+              x="70"
+              y="70"
+              width="660"
+              height="660"
+              rx="12"
+            />
+
+            <!-- INTERNAL BORDERS -->
+
+            <line
+              x1="400"
+              y1="70"
+              x2="400"
+              y2="730"
+              stroke="#0b2f52"
+              stroke-width="5"
+            />
+
+            <line
+              x1="70"
+              y1="400"
+              x2="730"
+              y2="400"
+              stroke="#0b2f52"
+              stroke-width="5"
+            />
+
+            <!-- CITY DOTS -->
+
+            <circle
+              class="city-dot"
+              cx="235"
+              cy="235"
+              r="13"
+              onclick="showCity('North City')"
+            />
+
+            <circle
+              class="city-dot"
+              cx="565"
+              cy="235"
+              r="13"
+              onclick="showCity('East City')"
+            />
+
+            <circle
+              class="city-dot"
+              cx="235"
+              cy="565"
+              r="13"
+              onclick="showCity('West City')"
+            />
+
+            <circle
+              class="city-dot"
+              cx="565"
+              cy="565"
+              r="13"
+              onclick="showCity('South City')"
+            />
+
+          </svg>
+
+
+          <!-- MAP INFO -->
+
+          <div class="map-info">
+            <h3 id="city-title">Micronation Map</h3>
+
+            <p id="city-description">
+              Click one of the little circles on the map to see the city.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- NEWS -->
+
+    <section id="news">
+
+      <div class="section-heading">
+        <h2>News</h2>
+        <p>News from around the micronation.</p>
+      </div>
+
+      <div class="news-grid">
+
+        <!--
+          ADD YOUR NEWS DIRECTLY HERE.
+
+          You can use:
+          "2 years ago"
+          "1 year ago"
+          "1 week ago"
+          "3 days ago"
+          etc.
+        -->
+
+        <article class="news-card">
+          <h3>Welcome to the Micronation Hub!</h3>
+
+          <p>
+            This is where you can write your micronation news.
+          </p>
+
+          <span class="news-date">2 years ago</span>
+        </article>
+
+
+        <article class="news-card">
+          <h3>New Map Released</h3>
+
+          <p>
+            The micronation map has been updated.
+          </p>
+
+          <span class="news-date">1 week ago</span>
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- COUNTRIES -->
+
+    <section id="countries">
+
+      <div class="section-heading">
+        <h2>Countries</h2>
+        <p>Explore the countries in the hub.</p>
+      </div>
+
+      <div class="country-grid">
+
+        <!-- Replace these PNG paths with your own PNG files -->
+
+        <article class="country-card">
+          <img src="country1.png" alt="Country 1">
+          <h3>Country 1</h3>
+        </article>
+
+        <article class="country-card">
+          <img src="country2.png" alt="Country 2">
+          <h3>Country 2</h3>
+        </article>
+
+        <article class="country-card">
+          <img src="country3.png" alt="Country 3">
+          <h3>Country 3</h3>
+        </article>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+    Micronation Hub
+  </footer>
+
+
+  <script>
+    function showCity(city) {
+      const title = document.getElementById("city-title");
+      const description = document.getElementById("city-description");
+
+      title.textContent = city;
+
+      description.textContent =
+        "You clicked " + city + ". You can edit this information directly in the HTML.";
+    }
+  </script>
+
+</body>
+</html>
