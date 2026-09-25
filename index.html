@@ -1,140 +1,349 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Micronation Hub</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Micronation Hub</title>
 
-<style>
-:root {
-  --light-blue:#eef8ff;
-  --pale-blue:#d9efff;
-  --blue:#69afe3;
-  --medium-blue:#3689c7;
-  --dark-blue:#0b2f52;
-  --border-blue:#a9d1ed;
-  --white:#fff;
-  --text-blue:#35688e;
-}
-* { box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body {
-  margin:0;
-  font-family:"Nunito",sans-serif;
-  background:linear-gradient(180deg,var(--light-blue),#fff);
-  color:var(--dark-blue);
-}
-.site-header {
-  width:min(1050px,calc(100% - 28px));
-  margin:18px auto;
-  padding:14px 18px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
-  background:#fff;
-  border:1px solid var(--border-blue);
-  border-radius:28px;
-  box-shadow:0 8px 22px rgba(11,47,82,.15);
-  position:sticky;
-  top:12px;
-  z-index:20;
-}
-.logo { font-size:1.35rem; font-weight:900; }
-.nav { display:flex; gap:8px; flex-wrap:wrap; }
-.btn {
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:10px 16px; border-radius:14px; border:1px solid var(--blue);
-  background:var(--pale-blue); color:var(--dark-blue);
-  font-family:inherit; font-weight:800; text-decoration:none; cursor:pointer;
-  box-shadow:0 5px 12px rgba(11,47,82,.18);
-  transition:.15s ease;
-}
-.btn:hover { background:#bfe2fa; transform:translateY(-2px); }
-.btn.primary { background:var(--dark-blue); color:#fff; border-color:var(--dark-blue); }
-.btn.primary:hover { background:var(--medium-blue); }
-main { width:min(1050px,calc(100% - 28px)); margin:0 auto; }
-section { padding:35px 0; scroll-margin-top:100px; }
-.section-heading { margin-bottom:18px; }
-.section-heading h1,.section-heading h2 { margin:0; font-weight:900; }
-.section-heading p { margin:6px 0 0; color:var(--text-blue); }
-.map-card {
-  background:#fff; border:1px solid var(--border-blue); border-radius:24px;
-  padding:18px; box-shadow:0 9px 22px rgba(11,47,82,.13);
-}
-.map-layout {
-  display:grid; grid-template-columns:minmax(0,1fr) 300px;
-  gap:18px; align-items:start;
-}
-.map {
-  width:100%; aspect-ratio:1/1; display:block;
-  background:#fff; border:3px solid var(--dark-blue);
-  border-radius:22px; overflow:hidden;
-}
-.country { cursor:pointer; transition:filter .15s ease; }
-.country:hover,.country:focus { filter:brightness(.92); outline:none; }
-.city-dot {
-  fill:#fff; stroke:#000; stroke-width:7; cursor:pointer;
-  transition:transform .15s ease, fill .15s ease;
-  transform-box:fill-box; transform-origin:center;
-}
-.city-dot:hover,.city-dot:focus { fill:#eaf6ff; transform:scale(1.18); outline:none; }
-.map-info {
-  padding:18px; background:var(--light-blue);
-  border:1px solid var(--border-blue); border-radius:18px;
-  box-shadow:0 6px 15px rgba(11,47,82,.08); min-height:300px;
-}
-.map-info h3 { margin:0 0 10px; font-size:1.35rem; }
-.map-info p { color:var(--text-blue); line-height:1.6; }
-.country-details { display:none; }
-.info-row {
-  display:flex; justify-content:space-between; gap:10px;
-  padding:7px 0; border-bottom:1px solid var(--border-blue); font-size:.92rem;
-}
-.info-row:last-child { border-bottom:none; }
-.info-label { font-weight:900; }
-.info-value { color:var(--text-blue); text-align:right; }
-.info-section { margin-top:15px; }
-.info-section h4 { margin:0 0 5px; font-size:1rem; }
-.info-section p { margin:0; font-size:.92rem; }
-.news-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
-.news-card {
-  background:#fff; border:1px solid var(--border-blue); border-radius:20px;
-  padding:20px; box-shadow:0 7px 18px rgba(11,47,82,.11);
-}
-.news-card h3 { margin:0 0 8px; }
-.news-card p { margin:0; color:var(--text-blue); line-height:1.6; }
-.news-date { display:block; margin-top:12px; color:var(--medium-blue); font-size:.9rem; font-weight:800; }
-.country-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
-.country-card {
-  background:#fff; border:1px solid var(--border-blue); border-radius:20px;
-  padding:16px; box-shadow:0 7px 18px rgba(11,47,82,.11);
-}
-.country-card img {
-  width:100%; aspect-ratio:16/10; object-fit:cover; display:block;
-  border-radius:15px; border:2px solid var(--border-blue); background:var(--pale-blue);
-}
-.country-card h3 { margin:13px 0 0; }
-footer {
-  width:min(1050px,calc(100% - 28px)); margin:20px auto 35px;
-  padding:18px; text-align:center; color:var(--text-blue);
-  border-top:1px solid var(--border-blue);
-}
-@media(max-width:760px) {
-  .site-header { flex-direction:column; align-items:stretch; }
-  .nav { justify-content:center; }
-  .map-layout { grid-template-columns:1fr; }
-  .news-grid,.country-grid { grid-template-columns:1fr; }
-}
-</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --light-blue: #eef8ff;
+      --pale-blue: #d9efff;
+      --blue: #69afe3;
+      --medium-blue: #3689c7;
+      --dark-blue: #0b2f52;
+      --border-blue: #a9d1ed;
+      --white: #ffffff;
+      --text-blue: #35688e;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Nunito", sans-serif;
+      background: linear-gradient(180deg, var(--light-blue), #ffffff);
+      color: var(--dark-blue);
+    }
+
+    .site-header {
+      width: min(1050px, calc(100% - 28px));
+      margin: 18px auto;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      background: var(--white);
+      border: 1px solid var(--border-blue);
+      border-radius: 28px;
+      box-shadow: 0 8px 22px rgba(11, 47, 82, 0.15);
+      position: sticky;
+      top: 12px;
+      z-index: 20;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--dark-blue);
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--blue);
+      background: var(--pale-blue);
+      color: var(--dark-blue);
+      font-family: inherit;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 5px 12px rgba(11, 47, 82, 0.18);
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+
+    .btn:hover {
+      background: #bfe2fa;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 17px rgba(11, 47, 82, 0.22);
+    }
+
+    .btn:active { transform: translateY(0); }
+
+    .btn.primary {
+      background: var(--dark-blue);
+      color: white;
+      border-color: var(--dark-blue);
+    }
+
+    .btn.primary:hover { background: var(--medium-blue); }
+
+    main {
+      width: min(1050px, calc(100% - 28px));
+      margin: 0 auto;
+    }
+
+    section {
+      padding: 35px 0;
+      scroll-margin-top: 100px;
+    }
+
+    .section-heading { margin-bottom: 18px; }
+
+    .section-heading h1,
+    .section-heading h2 {
+      margin: 0;
+      color: var(--dark-blue);
+      font-weight: 900;
+    }
+
+    .section-heading p {
+      margin: 6px 0 0;
+      color: var(--text-blue);
+    }
+
+    .map-card {
+      background: white;
+      border: 1px solid var(--border-blue);
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 9px 22px rgba(11, 47, 82, 0.13);
+    }
+
+    .map-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    /* The uploaded drawing is the actual map.
+       The SVG paths above it are invisible click targets, so the
+       original borders, ocean, colors and city dots stay exactly as drawn. */
+    .map {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: block;
+      background: white;
+      border: 3px solid var(--dark-blue);
+      border-radius: 22px;
+      overflow: hidden;
+    }
+
+    .map-image {
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .map-region {
+      fill: rgba(255, 255, 255, 0.001);
+      stroke: transparent;
+      stroke-width: 8;
+      cursor: pointer;
+      transition: fill .15s ease, stroke .15s ease;
+    }
+
+    .map-region:hover,
+    .map-region:focus {
+      fill: rgba(255, 255, 255, 0.10);
+      stroke: rgba(11, 47, 82, 0.35);
+      outline: none;
+    }
+
+    .city-hit {
+      fill: rgba(255, 255, 255, 0.001);
+      stroke: transparent;
+      stroke-width: 8;
+      cursor: pointer;
+      transition: fill .15s ease, stroke .15s ease;
+    }
+
+    .city-hit:hover,
+    .city-hit:focus {
+      fill: rgba(255, 255, 255, 0.12);
+      stroke: rgba(11, 47, 82, 0.45);
+      outline: none;
+    }
+
+    .map-info {
+      padding: 18px;
+      background: var(--light-blue);
+      border: 1px solid var(--border-blue);
+      border-radius: 18px;
+      box-shadow: 0 6px 15px rgba(11, 47, 82, 0.08);
+      min-height: 300px;
+    }
+
+    .map-info h3 {
+      margin: 0 0 10px;
+      color: var(--dark-blue);
+      font-size: 1.35rem;
+    }
+
+    .map-info p {
+      color: var(--text-blue);
+      line-height: 1.6;
+    }
+
+    .country-flag {
+      width: 100%;
+      max-width: 220px;
+      max-height: 135px;
+      object-fit: contain;
+      display: none;
+      margin: 0 auto 16px;
+      border-radius: 10px;
+      border: 2px solid var(--border-blue);
+      background: white;
+      box-shadow: 0 5px 12px rgba(11, 47, 82, 0.12);
+    }
+
+    .country-details { display: none; }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--border-blue);
+      font-size: .92rem;
+    }
+
+    .info-row:last-child { border-bottom: none; }
+
+    .info-label {
+      font-weight: 900;
+      color: var(--dark-blue);
+    }
+
+    .info-value {
+      color: var(--text-blue);
+      text-align: right;
+    }
+
+    .info-section { margin-top: 15px; }
+
+    .info-section h4 {
+      margin: 0 0 5px;
+      color: var(--dark-blue);
+      font-size: 1rem;
+    }
+
+    .info-section p {
+      margin: 0;
+      font-size: .92rem;
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .news-card {
+      background: white;
+      border: 1px solid var(--border-blue);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 7px 18px rgba(11, 47, 82, 0.11);
+    }
+
+    .news-card h3 {
+      margin: 0 0 8px;
+      color: var(--dark-blue);
+    }
+
+    .news-card p {
+      margin: 0;
+      color: var(--text-blue);
+      line-height: 1.6;
+    }
+
+    .news-date {
+      display: block;
+      margin-top: 12px;
+      color: var(--medium-blue);
+      font-size: .9rem;
+      font-weight: 800;
+    }
+
+    .country-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .country-card {
+      background: white;
+      border: 1px solid var(--border-blue);
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: 0 7px 18px rgba(11, 47, 82, 0.11);
+    }
+
+    .country-card img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      display: block;
+      border-radius: 15px;
+      border: 2px solid var(--border-blue);
+      background: var(--pale-blue);
+    }
+
+    .country-card h3 {
+      margin: 13px 0 0;
+      color: var(--dark-blue);
+    }
+
+    footer {
+      width: min(1050px, calc(100% - 28px));
+      margin: 20px auto 35px;
+      padding: 18px;
+      text-align: center;
+      color: var(--text-blue);
+      border-top: 1px solid var(--border-blue);
+    }
+
+    @media (max-width: 760px) {
+      .site-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav { justify-content: center; }
+
+      .map-layout { grid-template-columns: 1fr; }
+
+      .news-grid,
+      .country-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
+
 <header class="site-header">
   <div class="logo">Micronation Hub</div>
+
   <nav class="nav">
     <a class="btn primary" href="#map">Map</a>
     <a class="btn" href="#news">News</a>
@@ -143,73 +352,182 @@ footer {
 </header>
 
 <main>
+
 <section id="map">
   <div class="section-heading">
     <h1>Map</h1>
-    <p>Click a colored land region or a white city dot to explore it.</p>
+    <p>Click a land region or a city dot to explore it.</p>
   </div>
 
   <div class="map-card">
     <div class="map-layout">
 
-      <svg class="map" viewBox="0 0 2048 2048" preserveAspectRatio="xMidYMid meet"
-           aria-label="Vector micronation map">
-        <!-- Everything below is vector SVG. No map image is used as a background. -->
-        <path d="M 321 72 L 333 296 L 393 294 L 400 300 L 411 980 L 414 995 L 433 1000 L 434 1057 L 611 1052 L 611 994 L 615 990 L 758 982 L 755 596 L 761 590 L 891 600 L 896 606 L 901 632 L 913 834 L 1247 833 L 1277 855 L 1683 849 L 1683 788 L 1582 788 L 1573 782 L 1577 777 L 1567 516 L 1595 509 L 1740 505 L 1759 479 L 1746 0 L 385 0 L 385 65 Z" class="ocean-region" fill="#0048ff" stroke="#000000" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 769 605 L 770 979 L 802 987 L 897 986 L 893 841 L 901 829 L 886 613 Z" class="ocean-region" fill="#0048ff" stroke="#000000" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
-        <path class="country country-green" tabindex="0" fill="#00ff00" stroke="#000" stroke-width="12" stroke-linejoin="round" stroke-linecap="round" d="M 312 138 L 50 143 L 55 957 L 188 960 L 396 974 L 399 971 L 387 306 L 329 310 L 321 306 Z" aria-label="Green Land" onclick="showRegion('Green Land', 'The green land region on the map.', 'Land region')" onkeydown="activateRegion(event, 'Green Land', 'The green land region on the map.', 'Land region')" />
-<path class="country country-pink" tabindex="0" fill="#ff00dd" stroke="#000" stroke-width="12" stroke-linejoin="round" stroke-linecap="round" d="M 186 973 L 193 1184 L 328 1175 L 344 1182 L 358 1195 L 374 1223 L 373 1255 L 345 1280 L 315 1286 L 314 1306 L 318 1310 L 450 1313 L 456 1318 L 487 1500 L 1156 1485 L 1143 998 L 807 999 L 807 1054 L 802 1062 L 427 1070 L 422 1065 L 421 1009 L 405 1005 L 400 987 Z" aria-label="Pink Land" onclick="showRegion('Pink Land', 'The pink land region on the map.', 'Land region')" onkeydown="activateRegion(event, 'Pink Land', 'The pink land region on the map.', 'Land region')" />
-<path class="country country-pink" tabindex="0" fill="#ff00dd" stroke="#000" stroke-width="12" stroke-linejoin="round" stroke-linecap="round" d="M 354 1210 L 338 1193 L 325 1188 L 194 1197 L 198 1306 L 229 1307 L 232 1302 L 243 1301 L 246 1307 L 302 1309 L 301 1287 L 312 1273 L 338 1269 L 361 1251 L 363 1231 Z" aria-label="Pink Land" onclick="showRegion('Pink Land', 'The pink land region on the map.', 'Land region')" onkeydown="activateRegion(event, 'Pink Land', 'The pink land region on the map.', 'Land region')" />
-<path class="country country-pink" tabindex="0" fill="#ff00dd" stroke="#000" stroke-width="12" stroke-linejoin="round" stroke-linecap="round" d="M 1328 634 L 1282 639 L 1281 730 L 1325 726 L 1331 684 Z" aria-label="Pink Land" onclick="showRegion('Pink Land', 'The pink land region on the map.', 'Land region')" onkeydown="activateRegion(event, 'Pink Land', 'The pink land region on the map.', 'Land region')" />
-<path class="country country-red" tabindex="0" fill="#ff0015" stroke="#000" stroke-width="12" stroke-linejoin="round" stroke-linecap="round" d="M 322 1320 L 339 1336 L 381 1350 L 394 1359 L 392 1391 L 401 1420 L 402 1443 L 393 1463 L 359 1490 L 323 1496 L 266 1492 L 263 1515 L 249 1543 L 234 1556 L 208 1558 L 220 1917 L 1166 1900 L 1156 1497 L 483 1512 L 477 1503 L 445 1325 Z" aria-label="Red Land" onclick="showRegion('Red Land', 'The red land region on the map.', 'Land region')" onkeydown="activateRegion(event, 'Red Land', 'The red land region on the map.', 'Land region')" />
-<path class="country country-red" tabindex="0" fill="#ff0015" stroke="#000" stroke-width="12" stroke-linejoin="round" stroke-linecap="round" d="M 383 1365 L 331 1346 L 307 1319 L 243 1317 L 233 1321 L 229 1317 L 199 1316 L 207 1545 L 227 1545 L 239 1536 L 253 1509 L 252 1491 L 260 1481 L 344 1481 L 364 1473 L 382 1457 L 390 1438 L 380 1395 Z" aria-label="Red Land" onclick="showRegion('Red Land', 'The red land region on the map.', 'Land region')" onkeydown="activateRegion(event, 'Red Land', 'The red land region on the map.', 'Land region')" />
-<path class="country country-orange" tabindex="0" fill="#ff5500" stroke="#000" stroke-width="12" stroke-linejoin="round" stroke-linecap="round" d="M 1167 1911 L 221 1928 L 223 2013 L 1168 1982 Z" aria-label="Orange Land" onclick="showRegion('Orange Land', 'The orange land region on the map.', 'Land region')" onkeydown="activateRegion(event, 'Orange Land', 'The orange land region on the map.', 'Land region')" />
-<path class="country country-yellow" tabindex="0" fill="#ffdd00" stroke="#000" stroke-width="12" stroke-linejoin="round" stroke-linecap="round" d="M 1147 844 L 906 846 L 910 986 L 1143 986 L 1141 898 Z" aria-label="Yellow Land" onclick="showRegion('Yellow Land', 'The yellow land region on the map.', 'Land region')" onkeydown="activateRegion(event, 'Yellow Land', 'The yellow land region on the map.', 'Land region')" />
-<path class="country country-yellow" tabindex="0" fill="#ffdd00" stroke="#000" stroke-width="12" stroke-linejoin="round" stroke-linecap="round" d="M 795 998 L 762 991 L 623 999 L 628 1052 L 795 1050 Z" aria-label="Yellow Land" onclick="showRegion('Yellow Land', 'The yellow land region on the map.', 'Land region')" onkeydown="activateRegion(event, 'Yellow Land', 'The yellow land region on the map.', 'Land region')" />
-        <path d="M 410 64 L 416 69 L 435 48 L 461 32 L 495 28 L 511 38 L 533 71 L 567 81 L 658 72 L 744 51 L 785 49 L 948 82 L 1026 86 L 1067 78 L 1150 52 L 1219 42 L 1253 50 L 1336 99 L 1400 112 L 1455 113 L 1504 108 L 1591 76 L 1620 71 L 1650 74 L 1685 91 L 1690 88 L 1666 70 L 1618 63 L 1588 68 L 1496 101 L 1452 105 L 1393 103 L 1334 89 L 1256 42 L 1222 34 L 1143 45 L 1024 78 L 951 74 L 788 41 L 748 42 L 667 62 L 570 73 L 537 64 L 518 34 L 497 20 L 473 20 L 446 30 Z" class="water-line" fill="#608dff" stroke="none"/>
-<path d="M 415 170 L 418 175 L 446 176 L 490 192 L 579 261 L 626 278 L 695 276 L 824 252 L 941 242 L 1014 257 L 1046 270 L 1074 289 L 1092 291 L 1119 284 L 1156 262 L 1203 218 L 1233 211 L 1265 221 L 1506 330 L 1567 336 L 1634 327 L 1631 322 L 1564 328 L 1509 322 L 1261 210 L 1235 203 L 1202 209 L 1158 251 L 1114 277 L 1090 283 L 1077 281 L 1028 253 L 984 240 L 943 234 L 866 238 L 706 266 L 644 271 L 614 267 L 587 256 L 485 180 L 442 167 Z" class="water-line" fill="#608dff" stroke="none"/>
-<path d="M 1434 445 L 1342 434 L 1235 434 L 1181 439 L 1139 450 L 1055 496 L 1014 509 L 984 508 L 935 496 L 805 476 L 713 447 L 674 447 L 454 471 L 443 477 L 456 480 L 677 455 L 710 455 L 802 484 L 938 505 L 981 516 L 1017 517 L 1051 507 L 1137 460 L 1178 448 L 1238 442 L 1340 442 L 1431 450 Z" class="water-line" fill="#608dff" stroke="none"/>
-<path d="M 549 668 L 556 675 L 579 680 L 614 675 L 634 665 L 646 653 L 672 600 L 685 586 L 740 568 L 810 564 L 857 571 L 906 585 L 1000 629 L 1018 645 L 1047 699 L 1064 714 L 1081 720 L 1113 722 L 1136 718 L 1206 693 L 1274 675 L 1274 666 L 1124 712 L 1080 711 L 1054 695 L 1025 641 L 996 617 L 909 577 L 860 563 L 813 556 L 749 558 L 690 574 L 667 593 L 643 643 L 630 658 L 595 671 L 573 671 L 556 665 Z" class="water-line" fill="#608dff" stroke="none"/>
-<path d="M 1078 767 L 1087 772 L 1151 763 L 1218 764 L 1253 772 L 1280 791 L 1298 797 L 1333 793 L 1405 768 L 1437 770 L 1460 781 L 1465 778 L 1452 766 L 1428 760 L 1396 761 L 1311 789 L 1291 787 L 1253 763 L 1210 755 L 1136 756 Z" class="water-line" fill="#608dff" stroke="none"/>
-<path d="M 444 883 L 451 886 L 494 870 L 542 861 L 697 879 L 700 874 L 539 853 L 478 866 L 447 878 Z" class="water-line" fill="#608dff" stroke="none"/>
-<path d="M 875 860 L 871 854 L 866 857 L 864 890 L 848 906 L 836 901 L 827 878 L 817 869 L 793 868 L 780 881 L 785 884 L 800 875 L 814 877 L 830 907 L 837 913 L 851 914 L 872 893 Z" class="water-line" fill="#608dff" stroke="none"/>
-<path d="M 788 737 L 819 762 L 822 790 L 833 800 L 860 799 L 881 780 L 875 775 L 857 791 L 836 792 L 829 785 L 829 766 L 824 755 L 806 739 L 795 734 Z" class="water-line" fill="#608dff" stroke="none"/>
-<path d="M 796 678 L 799 683 L 842 687 L 886 682 L 883 677 Z" class="water-line" fill="#608dff" stroke="none"/>
-<path d="M 1338 653 L 1338 661 L 1372 661 L 1408 671 L 1414 668 L 1407 661 L 1382 654 Z" class="water-line" fill="#608dff" stroke="none"/>
-        <path d="M 244 1316 L 444 1323 L 478 1503 L 483 1510 L 1153 1496 L 1161 1492 L 1158 1487 L 488 1502 L 452 1315 L 246 1308 Z" class="gray-border" fill="#5f5f5f"/>
-<path d="M 195 1310 L 198 1315 L 229 1316 L 229 1308 L 198 1307 Z" class="gray-border" fill="#5f5f5f"/>
-        <circle class="city-dot" tabindex="0" cx="179.2" cy="860.5" r="18"
-      aria-label="Green Land City"
-      onclick="showCity('Green Land City', 'A city marked by the white dot in the green region.')"
-      onkeydown="activateCity(event, 'Green Land City', 'A city marked by the white dot in the green region.')"></circle>
-<circle class="city-dot" tabindex="0" cx="320.3" cy="1224.8" r="18"
-      aria-label="Pink Land City 1"
-      onclick="showCity('Pink Land City 1', 'A city marked by a white dot in the pink region.')"
-      onkeydown="activateCity(event, 'Pink Land City 1', 'A city marked by a white dot in the pink region.')"></circle>
-<circle class="city-dot" tabindex="0" cx="272.4" cy="1247.4" r="18"
-      aria-label="Pink Land City 2"
-      onclick="showCity('Pink Land City 2', 'A city marked by a white dot in the pink region.')"
-      onkeydown="activateCity(event, 'Pink Land City 2', 'A city marked by a white dot in the pink region.')"></circle>
-<circle class="city-dot" tabindex="0" cx="273.6" cy="1280.3" r="18"
-      aria-label="Pink Land City 3"
-      onclick="showCity('Pink Land City 3', 'A city marked by a white dot in the pink region.')"
-      onkeydown="activateCity(event, 'Pink Land City 3', 'A city marked by a white dot in the pink region.')"></circle>
-<circle class="city-dot" tabindex="0" cx="237.2" cy="1310.7" r="18"
-      aria-label="Pink Land City 4"
-      onclick="showCity('Pink Land City 4', 'A city near the pink and red border.')"
-      onkeydown="activateCity(event, 'Pink Land City 4', 'A city near the pink and red border.')"></circle>
-<circle class="city-dot" tabindex="0" cx="346.0" cy="1441.8" r="18"
-      aria-label="Red Land City 1"
-      onclick="showCity('Red Land City 1', 'A city marked by a white dot in the red region.')"
-      onkeydown="activateCity(event, 'Red Land City 1', 'A city marked by a white dot in the red region.')"></circle>
-<circle class="city-dot" tabindex="0" cx="289.6" cy="1466.6" r="18"
-      aria-label="Red Land City 2"
-      onclick="showCity('Red Land City 2', 'A city marked by a white dot in the red region.')"
-      onkeydown="activateCity(event, 'Red Land City 2', 'A city marked by a white dot in the red region.')"></circle>
+      <svg
+        class="map"
+        viewBox="0 0 2048 2048"
+        preserveAspectRatio="xMidYMid meet"
+        aria-label="Micronation map based on the uploaded drawing"
+      >
+        <!-- Exact uploaded drawing -->
+        <image
+          class="map-image"
+          href="micronation-map.png"
+          x="0"
+          y="0"
+          width="2048"
+          height="2048"
+          preserveAspectRatio="none"
+        />
+
+        <!-- LAND CLICK TARGETS
+             The colors and borders are supplied by the image itself. -->
+
+        <!-- Green land -->
+        <path
+          class="map-region"
+          tabindex="0"
+          aria-label="Green Land"
+          d="M 312 138 L 50 143 L 55 957 L 399 971 L 387 306 L 321 306 Z"
+          onclick="showRegion('Green Land', 'The green region on the map.', 'Land region')"
+          onkeydown="activateRegion(event, 'Green Land', 'The green region on the map.', 'Land region')"
+        />
+
+        <!-- Pink land -->
+        <path
+          class="map-region"
+          tabindex="0"
+          aria-label="Pink Land"
+          d="M 186 973 L 193 1184 L 328 1175 L 358 1195 L 374 1223 L 373 1255 L 345 1280 L 315 1286 L 314 1306 L 456 1318 L 487 1500 L 1156 1485 L 1143 998 L 807 999 L 802 1062 L 427 1070 L 421 1009 L 405 1005 L 400 987 Z"
+          onclick="showRegion('Pink Land', 'The pink region on the map.', 'Land region')"
+          onkeydown="activateRegion(event, 'Pink Land', 'The pink region on the map.', 'Land region')"
+        />
+
+        <!-- Red land -->
+        <path
+          class="map-region"
+          tabindex="0"
+          aria-label="Red Land"
+          d="M 322 1320 L 339 1336 L 394 1359 L 392 1391 L 402 1443 L 393 1463 L 359 1490 L 323 1496 L 266 1492 L 249 1543 L 234 1556 L 208 1558 L 220 1917 L 1166 1900 L 1156 1497 L 483 1512 L 445 1325 Z"
+          onclick="showRegion('Red Land', 'The red region on the map.', 'Land region')"
+          onkeydown="activateRegion(event, 'Red Land', 'The red region on the map.', 'Land region')"
+        />
+
+        <!-- Orange land -->
+        <path
+          class="map-region"
+          tabindex="0"
+          aria-label="Orange Land"
+          d="M 1167 1911 L 221 1928 L 223 2013 L 1168 1982 Z"
+          onclick="showRegion('Orange Land', 'The orange region on the map.', 'Land region')"
+          onkeydown="activateRegion(event, 'Orange Land', 'The orange region on the map.', 'Land region')"
+        />
+
+        <!-- Yellow land: upper section -->
+        <path
+          class="map-region"
+          tabindex="0"
+          aria-label="Yellow Land"
+          d="M 1147 844 L 906 846 L 910 986 L 1143 986 Z"
+          onclick="showRegion('Yellow Land', 'The upper yellow region on the map.', 'Land region')"
+          onkeydown="activateRegion(event, 'Yellow Land', 'The upper yellow region on the map.', 'Land region')"
+        />
+
+        <!-- Yellow land: small lower section -->
+        <path
+          class="map-region"
+          tabindex="0"
+          aria-label="Yellow Land South"
+          d="M 795 998 L 762 991 L 623 999 L 628 1052 L 795 1050 Z"
+          onclick="showRegion('Yellow Land South', 'The smaller yellow region on the map.', 'Land region')"
+          onkeydown="activateRegion(event, 'Yellow Land South', 'The smaller yellow region on the map.', 'Land region')"
+        />
+
+        <!-- CITY CLICK TARGETS
+             These line up with the white city dots in the uploaded image. -->
+
+        <circle
+          class="city-hit"
+          tabindex="0"
+          cx="179"
+          cy="860"
+          r="28"
+          aria-label="Green Land City"
+          onclick="showCity('Green Land City', 'A city marked by the white dot in the green region.')"
+          onkeydown="activateCity(event, 'Green Land City', 'A city marked by the white dot in the green region.')"
+        />
+
+        <circle
+          class="city-hit"
+          tabindex="0"
+          cx="320"
+          cy="1225"
+          r="28"
+          aria-label="Pink Land City 1"
+          onclick="showCity('Pink Land City 1', 'A city marked by a white dot in the pink region.')"
+          onkeydown="activateCity(event, 'Pink Land City 1', 'A city marked by a white dot in the pink region.')"
+        />
+
+        <circle
+          class="city-hit"
+          tabindex="0"
+          cx="272"
+          cy="1247"
+          r="28"
+          aria-label="Pink Land City 2"
+          onclick="showCity('Pink Land City 2', 'A city marked by a white dot in the pink region.')"
+          onkeydown="activateCity(event, 'Pink Land City 2', 'A city marked by a white dot in the pink region.')"
+        />
+
+        <circle
+          class="city-hit"
+          tabindex="0"
+          cx="274"
+          cy="1280"
+          r="28"
+          aria-label="Pink Land City 3"
+          onclick="showCity('Pink Land City 3', 'A city marked by a white dot in the pink region.')"
+          onkeydown="activateCity(event, 'Pink Land City 3', 'A city marked by a white dot in the pink region.')"
+        />
+
+        <circle
+          class="city-hit"
+          tabindex="0"
+          cx="237"
+          cy="1311"
+          r="28"
+          aria-label="Pink Land City 4"
+          onclick="showCity('Pink Land City 4', 'A city near the pink and red border.')"
+          onkeydown="activateCity(event, 'Pink Land City 4', 'A city near the pink and red border.')"
+        />
+
+        <circle
+          class="city-hit"
+          tabindex="0"
+          cx="346"
+          cy="1442"
+          r="28"
+          aria-label="Red Land City 1"
+          onclick="showCity('Red Land City 1', 'A city marked by a white dot in the red region.')"
+          onkeydown="activateCity(event, 'Red Land City 1', 'A city marked by a white dot in the red region.')"
+        />
+
+        <circle
+          class="city-hit"
+          tabindex="0"
+          cx="290"
+          cy="1467"
+          r="28"
+          aria-label="Red Land City 2"
+          onclick="showCity('Red Land City 2', 'A city marked by a white dot in the red region.')"
+          onkeydown="activateCity(event, 'Red Land City 2', 'A city marked by a white dot in the red region.')"
+        />
       </svg>
 
       <div class="map-info">
+        <img id="country-flag" class="country-flag" src="" alt="">
+
         <h3 id="city-title">Micronation Map</h3>
+
         <p id="city-description">
           Click a colored land region or one of the white city dots to see information.
         </p>
@@ -219,10 +537,12 @@ footer {
             <span class="info-label">Type</span>
             <span id="country-status" class="info-value"></span>
           </div>
+
           <div class="info-row">
             <span class="info-label">Region</span>
             <span id="country-capital" class="info-value"></span>
           </div>
+
           <div class="info-section">
             <h4>Description</h4>
             <p id="country-description"></p>
@@ -246,16 +566,19 @@ footer {
       <p>Pickle City has ceded their land, its land is unclaimed now.</p>
       <span class="news-date">2 years ago (from 2026)</span>
     </article>
+
     <article class="news-card">
       <h3>Land News</h3>
       <p>"Tung Tung Sahur M Labs" has token the unclaimed land that has been called "Garden City".</p>
       <span class="news-date">September 25, 2026</span>
     </article>
+
     <article class="news-card">
       <h3>NATO 2 News</h3>
       <p>"Tung Tung Sahur M Labs" has signed the NATO 2 treaty.</p>
       <span class="news-date">September 25, 2026</span>
     </article>
+
     <article class="news-card">
       <h3>War News</h3>
       <p>NATO 2 decided to declare war on Pickle City but it was soon realized it was unclaimed. Kevin Kingdom took the land.</p>
@@ -275,49 +598,60 @@ footer {
       <img src="country1.png" alt="North Country">
       <h3>North Country</h3>
     </article>
+
     <article class="country-card">
       <img src="country2.png" alt="East Country">
       <h3>East Country</h3>
     </article>
+
     <article class="country-card">
       <img src="country3.png" alt="West Country">
       <h3>West Country</h3>
     </article>
   </div>
 </section>
+
 </main>
 
 <footer>Micronation Hub</footer>
 
 <script>
-function showRegion(name, description, type) {
-  document.getElementById("city-title").textContent = name;
-  document.getElementById("city-description").textContent = "Land region selected.";
-  document.getElementById("country-details").style.display = "block";
-  document.getElementById("country-status").textContent = type;
-  document.getElementById("country-capital").textContent = name;
-  document.getElementById("country-description").textContent = description;
-}
+  function showRegion(name, description, type) {
+    document.getElementById("city-title").textContent = name;
+    document.getElementById("city-description").textContent = "Land region selected.";
 
-function showCity(city, description) {
-  document.getElementById("city-title").textContent = city;
-  document.getElementById("city-description").textContent = description;
-  document.getElementById("country-details").style.display = "none";
-}
+    document.getElementById("country-flag").style.display = "none";
+    document.getElementById("country-flag").src = "";
 
-function activateRegion(event, name, description, type) {
-  if (event.key === "Enter" || event.key === " ") {
-    event.preventDefault();
-    showRegion(name, description, type);
+    document.getElementById("country-details").style.display = "block";
+    document.getElementById("country-status").textContent = type;
+    document.getElementById("country-capital").textContent = name;
+    document.getElementById("country-description").textContent = description;
   }
-}
 
-function activateCity(event, city, description) {
-  if (event.key === "Enter" || event.key === " ") {
-    event.preventDefault();
-    showCity(city, description);
+  function showCity(city, description) {
+    document.getElementById("city-title").textContent = city;
+    document.getElementById("city-description").textContent = description;
+
+    document.getElementById("country-flag").style.display = "none";
+    document.getElementById("country-flag").src = "";
+    document.getElementById("country-details").style.display = "none";
   }
-}
+
+  function activateRegion(event, name, description, type) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      showRegion(name, description, type);
+    }
+  }
+
+  function activateCity(event, city, description) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      showCity(city, description);
+    }
+  }
 </script>
+
 </body>
 </html>
